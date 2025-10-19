@@ -5,9 +5,8 @@ if __name__ == "__main__":
         "127.0.0.1",
         9090,
         lang="en",
-        model=args.model,  # also support hf_model => `Systran/faster-whisper-small`
+        model="Systran/faster-whisper-small",
         use_vad=True,
         save_output_recording=False,
-        enable_translation=False,
     )
-    client(f)
+    client()

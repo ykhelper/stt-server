@@ -11,6 +11,6 @@ if __name__ == "__main__":
         "0.0.0.0",
         port=9090,
         backend="faster_whisper",
-        faster_whisper_custom_model_path="~/code/stt-server/models/model.bin",
+        faster_whisper_custom_model_path="/home/duk/code/stt-server/models",
         single_model=True,
     )
