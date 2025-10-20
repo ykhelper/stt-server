@@ -10,7 +10,7 @@ ENV UV_LINK_MODE=copy
 
 ENV UV_TOOL_BIN_DIR=/usr/local/bin
 
-RUN apt update && apt install -y portaudio19-dev && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y portaudio19-dev && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml /app/
 
@@ -19,12 +19,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --locked --no-install-project --no-dev
 
-RUN mkdir /app
-WORKDIR /app
+COPY server.py /app
 
-COPY run_server.py /app
+USER python
 
-CMD ["python3", "run_server.py",
-     "--port", "9090",
-     "--backend", "faster_whisper",
-     "--omp_num_threads", "4"]
+CMD ["uv", "run", "server.py"]
